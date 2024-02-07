@@ -43,7 +43,7 @@
           }
         }
       },
-      "required": ["email"],
+      "required": ["email", "name"],
       "additionalProperties": false
     }
   }
