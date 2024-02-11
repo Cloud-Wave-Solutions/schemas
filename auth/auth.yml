@@ -1,0 +1,97 @@
+version: v1.0.0
+
+serve:
+  public:
+    base_url: https://api.id.cw.co.ke
+    cors:
+      enabled: true
+
+selfservice:
+  default_browser_return_url: https://id.cw.co.ke/
+  allowed_return_urls:
+    - https://id.cw.co.ke/
+
+  methods:
+    password:
+      enabled: true
+    totp:
+      config:
+        issuer: CW Test
+      enabled: true
+    lookup_secret:
+      enabled: true
+    link:
+      enabled: true
+    code:
+      enabled: true
+    webauthn:
+      config:
+        passwordless: true
+        rp:
+          display_name: Cloud Wave
+          id: cw.co.ke
+          origin: https://id.cw.co.ke
+      enabled: true
+
+  flows:
+    error:
+      ui_url: https://id.cw.co.ke/error
+
+    settings:
+      ui_url: https://id.cw.co.ke/settings
+      privileged_session_max_age: 15m
+      required_aal: highest_available
+
+    recovery:
+      enabled: true
+      ui_url: https://id.cw.co.ke/recovery
+      use: code
+
+    verification:
+      enabled: true
+      ui_url: https://id.cw.co.ke/verification
+      use: code
+      after:
+        default_browser_return_url: https://id.cw.co.ke/
+
+    logout:
+      after:
+        default_browser_return_url: https://id.cw.co.ke/login
+
+    login:
+      ui_url: https://id.cw.co.ke/login
+      lifespan: 10m
+
+    registration:
+      lifespan: 10m
+      ui_url: https://id.cw.co.ke/registration
+      after:
+        password:
+          hooks:
+            - hook: session
+            - hook: show_verification_ui
+
+session:
+  whoami:
+    required_aal: highest_available
+
+log:
+  level: debug
+  format: text
+  leak_sensitive_values: true
+
+ciphers:
+  algorithm: xchacha20-poly1305
+
+hashers:
+  argon2:
+    parallelism: 1
+    memory: 128KB
+    iterations: 2
+    salt_length: 16
+    key_length: 16
+
+identity:
+  schemas:
+    - id: default
+      url: http://schemas.cw.co.ke/auth/identity.schema.json
