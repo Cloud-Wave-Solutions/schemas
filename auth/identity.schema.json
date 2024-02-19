@@ -2,7 +2,7 @@
   "$id": "https://schemas.cw.co.ke/auth/identity.schema.json",
   "title": "Person",
   "type": "object",
-    "definitions": {
+  "definitions": {
     "phone": {
       "type": "string",
       "format": "tel",
@@ -12,7 +12,7 @@
       "type": "boolean",
       "title": "Get security-related notifications"
     },
-      "optIn": {
+    "accepted_tos": {
       "type": "boolean",
       "title": "Agree to our terms of service"
     }
@@ -41,10 +41,10 @@
           "ory.sh/kratos": {
             "credentials": {
               "password": {
-                "identifier": true,
-              },
-            },
-          },
+                "identifier": true
+              }
+            }
+          }
         },
         "email": {
           "type": "string",
@@ -83,24 +83,21 @@
         "$ref": "#/definitions/optIn"
       },
       "name": {
-          "type": "object",
-          "required": [
-            "first",
-            "last"
-          ],
-          "properties": {
-            "first": {
-              "type": "string",
-              "title": "First name",
-              "maxLength": 256
-            },
-            "last": {
-              "type": "string",
-              "title": "Last name",
-              "maxLength": 256
-            }
+        "type": "object",
+        "required": ["first", "last"],
+        "properties": {
+          "first": {
+            "type": "string",
+            "title": "First name",
+            "maxLength": 256
+          },
+          "last": {
+            "type": "string",
+            "title": "Last name",
+            "maxLength": 256
           }
         }
+      },
       "required": ["email", "accepted_tos"],
       "additionalProperties": false,
       "dependencies": {
@@ -110,10 +107,7 @@
               "$ref": "#/definitions/phone"
             }
           },
-          "required": [
-            "phone",
-            "email"
-          ]
+          "required": ["phone", "email"]
         },
         "phone": {
           "properties": {
@@ -121,12 +115,9 @@
               "$ref": "#/definitions/optIn"
             }
           },
-          "required": [
-            "optIn"
-          ]
+          "required": ["optIn"]
         }
       }
     }
   }
 }
-  
