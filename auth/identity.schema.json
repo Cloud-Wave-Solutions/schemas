@@ -1,17 +1,55 @@
 {
   "$id": "https://schemas.cw.co.ke/auth/identity.schema.json",
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Person",
   "type": "object",
+    "definitions": {
+    "phone": {
+      "type": "string",
+      "format": "tel",
+      "title": "Phone Number"
+    },
+    "optIn": {
+      "type": "boolean",
+      "title": "Get security-related notifications"
+    },
+      "optIn": {
+      "type": "boolean",
+      "title": "Agree to our terms of service"
+    }
+  },
   "properties": {
     "traits": {
       "type": "object",
       "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 64,
+          "title": "Username",
+          "ory.sh/kratos": {
+            "credentials": {
+              "password": {
+                "identifier": true
+              }
+            }
+          }
+        },
+        "phone": {
+          "title": "Phone",
+          "type": "string",
+          "format": "tel",
+          "ory.sh/kratos": {
+            "credentials": {
+              "password": {
+                "identifier": true,
+              },
+            },
+          },
+        },
         "email": {
           "type": "string",
           "format": "email",
-          "title": "E-Mail",
-          "minLength": 3,
+          "title": "Email",
           "ory.sh/kratos": {
             "credentials": {
               "password": {
@@ -19,32 +57,76 @@
               },
               "webauthn": {
                 "identifier": true
+              },
+              "totp": {
+                "account_name": true
+              },
+              "code": {
+                "identifier": true,
+                "via": "email"
               }
-            },
-            "verification": {
-              "via": "email"
             },
             "recovery": {
               "via": "email"
+            },
+            "verification": {
+              "via": "email"
             }
-          }
-        },
-        "name": {
+          },
+          "maxLength": 320
+        }
+      },
+      "accepted_tos": {
+        "$ref": "#/definitions/accepted_tos"
+      },
+      "optIn": {
+        "$ref": "#/definitions/optIn"
+      },
+      "name": {
           "type": "object",
+          "required": [
+            "first",
+            "last"
+          ],
           "properties": {
             "first": {
-              "title": "First Name",
-              "type": "string"
+              "type": "string",
+              "title": "First name",
+              "maxLength": 256
             },
             "last": {
-              "title": "Last Name",
-              "type": "string"
+              "type": "string",
+              "title": "Last name",
+              "maxLength": 256
             }
           }
         }
-      },
-      "required": ["email", "name"],
-      "additionalProperties": false
+      "required": ["email", "accepted_tos"],
+      "additionalProperties": false,
+      "dependencies": {
+        "optIn": {
+          "properties": {
+            "phone": {
+              "$ref": "#/definitions/phone"
+            }
+          },
+          "required": [
+            "phone",
+            "email"
+          ]
+        },
+        "phone": {
+          "properties": {
+            "optIn": {
+              "$ref": "#/definitions/optIn"
+            }
+          },
+          "required": [
+            "optIn"
+          ]
+        }
+      }
     }
   }
 }
+  
