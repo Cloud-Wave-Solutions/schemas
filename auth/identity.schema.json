@@ -54,13 +54,7 @@
             "credentials": {
               "password": {
                 "identifier": true
-              },
-              "webauthn": {
-                "identifier": true
-              },
-              "totp": {
-                "account_name": true
-              },
+              }
             },
             "recovery": {
               "via": "email"
@@ -70,28 +64,28 @@
             }
           },
           "maxLength": 320
-        }
-      },
-      "accepted_tos": {
-        "$ref": "#/definitions/accepted_tos"
-      },
-      "optIn": {
-        "$ref": "#/definitions/optIn"
-      },
-      "name": {
-        "type": "object",
-        "required": ["first", "last"],
-        "properties": {
-          "first": {
-            "type": "string",
-            "title": "First name",
-            "maxLength": 256
-          },
-          "last": {
-            "type": "string",
-            "title": "Last name",
-            "maxLength": 256
+        },
+        "name": {
+          "type": "object",
+          "required": ["first", "last"],
+          "properties": {
+            "first": {
+              "type": "string",
+              "title": "First name",
+              "maxLength": 256
+            },
+            "last": {
+              "type": "string",
+              "title": "Last name",
+              "maxLength": 256
+            }
           }
+        },
+        "accepted_tos": {
+          "$ref": "#/definitions/accepted_tos"
+        },
+        "optIn": {
+          "$ref": "#/definitions/optIn"
         }
       },
       "required": ["email", "accepted_tos"],
