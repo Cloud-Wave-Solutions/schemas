@@ -21,19 +21,6 @@
     "traits": {
       "type": "object",
       "properties": {
-        "username": {
-          "type": "string",
-          "minLength": 6,
-          "maxLength": 64,
-          "title": "Username",
-          "ory.sh/kratos": {
-            "credentials": {
-              "password": {
-                "identifier": true
-              }
-            }
-          }
-        },
         "phone": {
           "title": "Phone",
           "type": "string",
