@@ -99,7 +99,7 @@
         }
       },
       "required": ["email", "accepted_tos"],
-      "additionalProperties": false,
+      "additionalProperties": true,
       "dependencies": {
         "optIn": {
           "properties": {
