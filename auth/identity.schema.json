@@ -29,7 +29,10 @@
             "credentials": {
               "password": {
                 "identifier": true
-              }
+              },
+              "passkey": {
+                "display_name": true,
+              },
             },
             "verification": {
               "via": "sms"
