@@ -31,7 +31,7 @@
                 "identifier": true
               },
               "passkey": {
-                "display_name": true,
+                "display_name": true
               },
             },
             "verification": {
