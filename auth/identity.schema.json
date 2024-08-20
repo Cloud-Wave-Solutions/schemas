@@ -32,7 +32,7 @@
               },
               "passkey": {
                 "display_name": true
-              },
+              }
             },
             "verification": {
               "via": "sms"
