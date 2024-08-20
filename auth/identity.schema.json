@@ -36,25 +36,6 @@
             }
           }
         },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "title": "Email",
-          "ory.sh/kratos": {
-            "credentials": {
-              "password": {
-                "identifier": true
-              }
-            },
-            "recovery": {
-              "via": "email"
-            },
-            "verification": {
-              "via": "email"
-            }
-          },
-          "maxLength": 320
-        },
         "name": {
           "type": "object",
           "required": ["first", "last"],
@@ -78,7 +59,7 @@
           "$ref": "#/definitions/optIn"
         }
       },
-      "required": ["email", "accepted_tos"],
+      "required": ["accepted_tos"],
       "additionalProperties": false,
       "dependencies": {
         "optIn": {
@@ -87,7 +68,7 @@
               "$ref": "#/definitions/phone"
             }
           },
-          "required": ["phone", "email"]
+          "required": ["phone"]
         },
         "phone": {
           "properties": {
