@@ -22,14 +22,17 @@
       "type": "object",
       "properties": {
         "phone": {
-          "title": "Phone",
           "type": "string",
           "format": "tel",
+          "title": "Phone number",
           "ory.sh/kratos": {
             "credentials": {
               "password": {
                 "identifier": true
               }
+            },
+            "verification": {
+              "via": "sms"
             }
           }
         },
